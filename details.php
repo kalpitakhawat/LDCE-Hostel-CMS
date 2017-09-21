@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title></title>
     <?php include './master/headers.php'; ?>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
 </head>
 
 <body>
@@ -18,7 +19,7 @@
             </div>
             <!-- /.row -->
             <div class="row">
-                <div class="col-lg-10">
+                <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Basic Form Elements
@@ -30,13 +31,14 @@
                                         <div class="col-lg-8">
                                             <div class="form-group">
                                                 <label>Enrollment No</label>
-                                                <input class="form-control" v-model="info.enroll_no">
+                                                <input class="form-control" v-model="info.enroll_no" required>
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="form-group">
                                                 <label>Sem</label>
-                                                <select class="form-control" v-model="info.sem">
+                                                <select class="form-control" v-model="info.sem" required>
+                                                    <option value="">Select Sem</option>
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>
@@ -51,31 +53,32 @@
                                         <div class="col-lg-12">
                                             <div class="form-group">
                                                 <label>Name</label>
-                                                <input class="form-control" v-model="info.name">
+                                                <input class="form-control" v-model="info.name" required>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label>Student Mobile</label>
-                                                <input class="form-control" v-model="info.stud_mob">
+                                                <input class="form-control" v-model="info.stud_mob" required>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label>Parents Mobile</label>
-                                                <input class="form-control" v-model="info.parent_mob">
+                                                <input class="form-control" v-model="info.parent_mob" required>
                                             </div>
                                         </div>
                                         <div class="col-lg-8">
                                             <div class="form-group">
                                                 <label>Last Hostel Fee Receipt No</label>
-                                                <input class="form-control" v-model="info.last_hostel_fee_receipt">
+                                                <input class="form-control" v-model="info.last_hostel_fee_receipt" required>
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="form-group">
                                                 <label>Admission Year</label>
-                                                <select class="form-control" v-model="info.addmission_year">
+                                                <select class="form-control" v-model="info.addmission_year" required>
+                                                    <option value="">Select Adminssion Year</option>
                                                     <option value="2014">2014</option>
                                                     <option value="2015">2015</option>
                                                     <option value="2016">2016</option>
@@ -86,7 +89,7 @@
                                         <div class="col-lg-12">
                                             <div class="form-group">
                                                 <label>Student Mail</label>
-                                                <input class="form-control" v-model="info.stud_mail">
+                                                <input class="form-control" v-model="info.stud_mail" required>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
@@ -98,13 +101,13 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label>District</label>
-                                                <input class="form-control" v-model="info.district">
+                                                <input class="form-control" v-model="info.district" required>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label>State</label>
-                                                <input class="form-control" v-model="info.state">
+                                                <input class="form-control" v-model="info.state" required>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
@@ -126,7 +129,7 @@
                                         <div class="col-lg-12">
                                             <div class="form-group">
                                                 <label></label>
-                                                <input type="Submit" class="btn btn-info" value="Update">
+                                                <input type="Submit" class="btn btn-info" value="Update" :disabled="process == true">
                                             </div>
                                         </div>
                                     </form>
@@ -145,6 +148,7 @@
         </div>
     </div>
     <?php include './master/scripts.php'; ?>
+    <script src="./js/jquery.toaster.js"></script>
     <script type="text/javascript" src="./js/custom.js"></script>
     <script type="text/javascript">
     var app = new Vue({
@@ -153,6 +157,7 @@
             info: [],
             def:'',
             b64data: false,
+            process:false,
         },
         created: function() {
             var self = this;
@@ -166,13 +171,22 @@
         methods:{
             onSubmit:function () {
                 var self = this;
+                self.process=true;
                 var q="";
                 q = "enroll_no = '" + self.info['enroll_no'] + "' , name = '" + self.info['name'] + "' , sem= '" + self.info['sem'] + "' , stud_mob= '" + self.info['stud_mob'] + "' , parent_mob= '" + self.info['parent_mob'] + "' , last_hostel_fee_receipt = '" + self.info['last_hostel_fee_receipt'] + "' , addmission_year = '" + self.info['addmission_year'] + "' ,  stud_mail = '" + self.info['stud_mail'] + "' , stud_address = '" + self.info['stud_address'] + "' , district = '" + self.info['district'] + "' , state = '" + self.info['state'] + "' , adhar_no = '" + self.info['adhar_no'] + "' , photo = '" + self.info['photo'] + "' ";
                 q = q + " WHERE Id = '" + _get('id') + "' " ;
                 $.post('./api/update.php', { query: q }, function(result) {
-                console.log(result);
+                  if (result[0]=='success') {
+                    $.toaster('Your information has been successfully updated', 'Success', 'success');
+                    setTimeout(function() {
+                      window.location.replace('./');
+                    }, 1600);
+                  }else {
+                    $.toaster(result[1], 'Error', 'danger');
+                    self.process=false;
+                  }
                 });
-                console.log(q);
+
             }
         },
     });

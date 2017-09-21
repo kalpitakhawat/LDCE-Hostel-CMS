@@ -12,7 +12,7 @@
 			    array_push($out, 'error');
 			    array_push($out, mysqli_error($con));
 			}
-
+			header('Content-type:application/json');
 			echo json_encode($out);
 		}else {
 
