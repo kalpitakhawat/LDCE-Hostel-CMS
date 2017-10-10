@@ -53,7 +53,7 @@
                                         <div class="col-lg-12">
                                             <div class="form-group">
                                                 <label>Name</label>
-                                                <input class="form-control" v-model="info.name" required>
+                                                <input class="form-control" v-model="info.name" required disabled="">
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -204,8 +204,8 @@
             //document.body.appendChild(image);
 
             image.onload = function(e) {
-                canvas.width = 100; // target width
-                canvas.height = Math.round((image.height * 100) / image.width);
+                canvas.width = 200; // target width
+                canvas.height = Math.round((image.height * 200) / image.width);
 
                 ctx.drawImage(image,
                     0, 0, image.width, image.height,

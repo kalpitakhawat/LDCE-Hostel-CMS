@@ -46,10 +46,7 @@
 
                   </div>
                 </div>
-                <div class="panel-footer">
-                  <button type="button" name="btnPrev" class="btn btn-primary" v-on:click="prevResult" :disabled="shortcuts == false"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
-                  <button type="button" name="btnNext" class="btn btn-primary" style="float:right;" v-on:click="nextResult" :disabled="shortcuts == false"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
-                </div>
+
             </div>
           </div>
         </div>
@@ -66,7 +63,8 @@
                       <div class="text text-center" v-if="results.length < 1"><h4>No Results</h4></div>
                       <div class="col-sm-6 col-md-4" v-bind:class=" { 'col-xs-4' : isLandscape} " v-for="r in results">
                         <div class="thumbnail">
-                          <img src="./imgs/user.png" alt="..." width="100%">
+                          <img v-bind:src="def" alt="..." v-if=" r.photo == ''" width="100%">
+                          <img v-bind:src="r.photo" alt="..." v-else width="100%">
                           <div class="caption">
                             <h5> {{r.name}} </h5>
                             <p><strong>Mobile No :</strong> <a v-bind:href="'tel:'+r.stud_mob">{{r.stud_mob}}</a> </p>
@@ -86,6 +84,7 @@
     </div>
 
     <?php include './master/scripts.php'; ?>
+    <script type="text/javascript" src="./js/custom.js"></script>
     <script type="text/javascript">
       function windowResize() {
         app.resize();
@@ -103,10 +102,13 @@
           isLandscape:false,
           results:[],
           process:false,
+          def:"",
         },
         created:function () {
           var self = this;
-          self.blocks.push("H");
+          $.post("./api/getBlocks.php", function(result){
+              self.blocks=result;
+          });
           self.resize();
         },
         methods:{
@@ -119,6 +121,7 @@
             $.post("./api/searchApi.php", {query: q}, function(result){
                 self.results=result;
                 self.process=false;
+                self.def=_default();
             });
 
             self.initial=false;
