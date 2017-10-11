@@ -34,13 +34,16 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li>
-                  <a href="./add.php"><i class="fa fa-plus fa-fw"></i>Add New Record</a>
+                    <a href="./"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                 </li>
                 <li>
-                  <a href="./search.php"><i class="fa fa-search fa-fw"></i>Search By Room</a>
+                  <a href="./add.php"><i class="fa fa-plus fa-fw"></i> Add New Record</a>
                 </li>
                 <li>
-                  <a href="./report.php"><i class="fa fa-list-alt fa-fw"></i>Report Generator</a>
+                  <a href="./search.php"><i class="fa fa-search fa-fw"></i> Search By Room</a>
+                </li>
+                <li>
+                  <a href="./report.php"><i class="fa fa-list-alt fa-fw"></i> Report Generator</a>
                 </li>
             </ul>
         </div>
