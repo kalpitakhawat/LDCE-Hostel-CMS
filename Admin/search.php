@@ -55,7 +55,18 @@
         </div>
         <div class="panel panel-info">
             <div class="panel-heading">
-                <i class="fa fa-table fa-fw"></i>Data
+              <div class="row">
+                <div class="col-lg-3">
+                  <i class="fa fa-table fa-fw"></i>Data
+                </div>
+                <div class="col-lg-9">
+                  <form action="add.php" method="post">
+                    <input type="hidden" name="block" v-model="blk">
+                    <input type="hidden" name="room" v-model="room">
+                    <button v-if="blk!=''|| room!='' " class="btn btn-link" name="Submit" style="padding:0px; float:right;"><i class="fa fa-plus"></i> Add New Record In <strong>{{blk}}-{{room}}</strong></button>
+                  </form>
+                </div>
+              </div>
             </div>
             <div class="panel-body">
               <div class="row">
@@ -94,6 +105,8 @@
         el:"#wrapper",
         data:{
           blocks:[],
+          blk:"",
+          room:"",
           selectedBlock:'',
           roomNumber:'',
           initial:true,
@@ -122,7 +135,8 @@
                 self.process=false;
                 self.def=_default();
             });
-
+            self.blk=self.selectedBlock;
+            self.room=self.roomNumber;
             self.initial=false;
 
           },

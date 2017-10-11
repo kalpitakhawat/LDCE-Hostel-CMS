@@ -34,7 +34,8 @@
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li>
-                    <a href="./search.php"><i class="fa fa-search fa-fw"></i>Search By Room</a>
+                  <a href="./add.php"><i class="fa fa-plus fa-fw"></i>Add New Record</a>
+                  <a href="./search.php"><i class="fa fa-search fa-fw"></i>Search By Room</a>
                 </li>
             </ul>
         </div>
