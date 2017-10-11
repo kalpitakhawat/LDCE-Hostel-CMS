@@ -171,15 +171,7 @@
 
   <?php include './master/scripts.php'; ?>
   <script src="../js/jquery.toaster.js"></script>
-
-  <script type="text/javascript">
-    var getQueryString = function ( field, url ) {
-      var href = url ? url : window.location.href;
-      var reg = new RegExp( '[?&]' + field + '=([^&#]*)', 'i' );
-      var string = reg.exec(href);
-      return string ? string[1] : null;
-    };
-  </script>
+  <script type="text/javascript" src="../js/custom.js"></script>
   <script type="text/javascript">
     var app= new Vue({
       el:"#wrapper",
@@ -188,7 +180,7 @@
       },
       created:function () {
         var self = this;
-        self.id=getQueryString('id');
+        self.id=_get('id');
       },
       methods:{
         edt:function () {
@@ -200,6 +192,21 @@
 
         },
         dlt:function () {
+          var self = this;
+          if (confirm("Are You Sure to Delete Record ?")) {
+            $.post('../api/delete.php', { id: self.id }, function(result) {
+              if (result[0]=='success') {
+                $.toaster('Deleted successfully', 'Success', 'success');
+                setTimeout(function() {
+                  window.location.replace('./search.php');
+                }, 1600);
+              }else {
+                $.toaster(result[1], 'Error', 'danger');
+                self.process=false;
+              }
+          });
+          }
+
 
         }
       }
