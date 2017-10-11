@@ -18,7 +18,7 @@
         </div>
         <div class="row">
           <div class="col-lg-12">
-            <div class="panel panel-default">
+            <div class="panel panel-warning">
               <div class="panel-heading">
                 <i class="fa fa-search"></i>
                 Search Query
@@ -76,7 +76,7 @@
         </div>
         <div class="row">
           <div class="col-lg-12">
-            <div class="panel panel-default">
+            <div class="panel panel-info">
               <div class="panel-heading">
                 <i class="fa fa-table"></i>
                 Data Table <button class="btn btn-link" style="padding: 0px; float: right;" v-on:click="convert"><i class="fa fa-file-excel-o" aria-hidden="true"></i>  Export As CSV</button>
