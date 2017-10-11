@@ -35,7 +35,12 @@
             <ul class="nav" id="side-menu">
                 <li>
                   <a href="./add.php"><i class="fa fa-plus fa-fw"></i>Add New Record</a>
+                </li>
+                <li>
                   <a href="./search.php"><i class="fa fa-search fa-fw"></i>Search By Room</a>
+                </li>
+                <li>
+                  <a href="./report.php"><i class="fa fa-list-alt fa-fw"></i>Report Generator</a>
                 </li>
             </ul>
         </div>
