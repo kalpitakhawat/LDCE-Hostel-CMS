@@ -1,6 +1,6 @@
 <?php
   $out=array();
-	$con = mysqli_connect("localhost","root","","hostel");
+	require 'connect.inc.php';
 	if(isset($_GET['id'])){
 		$string=$_GET['id'];
 		if($con) {

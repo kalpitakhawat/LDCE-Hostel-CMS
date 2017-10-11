@@ -1,5 +1,5 @@
 <?php
-	$con = mysqli_connect("localhost","root","","hostel");
+	require 'connect.inc.php';
 	if(isset($_POST['query'])){
 		$string=$_POST['query'];
 		if($con) {

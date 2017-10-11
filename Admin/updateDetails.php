@@ -43,7 +43,11 @@
                                       <div class="col-lg-4">
                                           <div class="form-group">
                                               <label>Admission Type</label>
-                                              <input class="form-control" v-model="info.addmission_type">
+                                              <select class="form-control" v-model="info.addmission_type">
+                                                <option value="">Select Admission Type</option>
+                                                <option value="Regular">Regular</option>
+                                                <option value="N plus 1">N plus 1</option>
+                                              </select>
                                           </div>
                                       </div>
                                         <div class="col-lg-8">
@@ -188,7 +192,7 @@
               var self = this;
               self.process=true;
               var q="";
-              q = "block_no = '" + self.info['bock_no'] + "' , room_no = '" + self.info['room_no'] + "' , addmission_type = '" + self.info['addmission_type'] + "' , enroll_no = '" + self.info['enroll_no'] + "' , name = '" + self.info['name'] + "' , sem= '" + self.info['sem'] + "' , stud_mob= '" + self.info['stud_mob'] + "' , parent_mob= '" + self.info['parent_mob'] + "' , last_hostel_fee_receipt = '" + self.info['last_hostel_fee_receipt'] + "' , addmission_year = '" + self.info['addmission_year'] + "' ,  stud_mail = '" + self.info['stud_mail'] + "' , stud_address = '" + self.info['stud_address'] + "' , district = '" + self.info['district'] + "' , state = '" + self.info['state'] + "' , adhar_no = '" + self.info['adhar_no'] + "' , photo = '" + self.info['photo'] + "' ";
+              q = "block_no = '" + self.info['block_no'] + "' , room_no = '" + self.info['room_no'] + "' , addmission_type = '" + self.info['addmission_type'] + "' , enroll_no = '" + self.info['enroll_no'] + "' , name = '" + self.info['name'] + "' , sem= '" + self.info['sem'] + "' , stud_mob= '" + self.info['stud_mob'] + "' , parent_mob= '" + self.info['parent_mob'] + "' , last_hostel_fee_receipt = '" + self.info['last_hostel_fee_receipt'] + "' , addmission_year = '" + self.info['addmission_year'] + "' ,  stud_mail = '" + self.info['stud_mail'] + "' , stud_address = '" + self.info['stud_address'] + "' , district = '" + self.info['district'] + "' , state = '" + self.info['state'] + "' , adhar_no = '" + self.info['adhar_no'] + "' , photo = '" + self.info['photo'] + "' ";
               q = q + " WHERE Id = '" + _get('id') + "' " ;
               $.post('../api/update.php', { query: q }, function(result) {
                 if (result[0]=='success') {

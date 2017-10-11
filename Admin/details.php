@@ -1,4 +1,6 @@
-<?php include './inc/detailinc.php';?>
+<?php
+set_include_path ('../api'); 
+include 'detail.inc.php';?>
 <!DOCTYPE html>
 <html>
 
