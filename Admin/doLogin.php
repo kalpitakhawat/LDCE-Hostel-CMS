@@ -9,7 +9,11 @@ $uname='constellation';
       $_SESSION['username'] = $uname;
       $_SESSION['passkey'] = md5($uname);
       header('location:./');
-    }else{}
+    }else{
+      $_SESSION['error'] = "Username - password pair is invalid. We're tracking you!: <br>";
+      $_SESSION['error'].= 'IP # '.$_SERVER['REMOTE_ADDR']."<br />";
+      header('location:./login.php');
+    }
   } else {
     $_SESSION['error'] = "Username - password pair is invalid. We're tracking you!: <br>";
     $_SESSION['error'].= 'IP # '.$_SERVER['REMOTE_ADDR']."<br />";

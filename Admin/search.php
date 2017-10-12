@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title></title>
     <?php include './master/headers.php'; ?>
+
   </head>
   <body onresize="windowResize()">
     <div id="wrapper">
@@ -58,13 +59,18 @@
             <div class="panel-heading">
               <div class="row">
                 <div class="col-lg-3">
-                  <i class="fa fa-table fa-fw"></i>Data
+                  <h4>
+                    <i class="fa fa-table fa-fw"></i>Data
+                  </h4>
                 </div>
                 <div class="col-lg-9">
                   <form action="add.php" method="post">
                     <input type="hidden" name="block" v-model="blk">
                     <input type="hidden" name="room" v-model="room">
-                    <button v-if="blk!=''|| room!='' " class="btn btn-link" name="Submit" style="padding:0px; float:right;"><i class="fa fa-plus"></i> Add New Record In <strong>{{blk}}-{{room}}</strong></button>
+                    <div v-if="blk!=''|| room!='' " class="text-right">
+                      <button  class="btn btn-success " name="Submit"><i class="fa fa-plus"></i> New in <strong>{{blk}}-{{room}}</strong></button>
+                      <button type="button" class="btn btn-primary" v-on:click="do_print()"><i class="fa fa-print"></i>Print</button>
+                    </div>
                   </form>
                 </div>
               </div>
@@ -168,6 +174,20 @@
               self.isLandscape=false;
             }
           },
+          do_print:function () {
+              var str='<head> <style>body{font-family: sans-serif; padding-left: 3em; padding-right: 3em;} td{ border:1px solid #CCC; }</style></head><body> <center> <h1>'+ (this.results[0] ? this.results[0].block_no: "") +' - '+(this.results[0] ? this.results[0].room_no: "")+'</h1> </center>';
+              for( i in this.results )
+              {
+                  e= this.results[i];
+                  str +='<table class="tbl" cellpadding="6" width="100%" cellspacing="0"> <tbody> <tr> <td rowspan="7" align="center" width="30%"><img src="'+( e.photo ? e.photo : _default() )+'" width="150px" alt=""> </td><td width="25%"><strong>Name</strong></td><td>'+e.name+'</td></tr><tr> <td width="25%"><strong>Student Mobile No</strong></td><td>'+e.stud_mob+' </td></tr><tr> <td width="25%"><strong>Enrollment No</strong></td><td>'+e.enroll_no+'</td></tr><tr> <td width="25%"><strong>Branch - Sem</strong></td><td>'+ e.branch +' - '+e.sem+'</td></tr><tr> <td width="25%"><strong>Category</strong></td><td>'+ e.category +'</td></tr><tr> <td width="25%"><strong>Admission Type</strong></td><td>'+e.addmission_type+'</td></tr><tr> <td width="25%"><strong>Course</strong></td><td>'+e.course+'</td></tr></tbody> </table> <br>';
+                }
+              str+='</body>';
+              var nw = window.open();
+              nw.document.write( str );
+              nw.print();
+              nw.close();
+
+          }
         },
         watch:{
           selectedBlock:function (e) {
