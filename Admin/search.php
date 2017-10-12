@@ -137,13 +137,15 @@
             if( isNaN(self.roomNumber) ) return alert("Topa je kam karva mate banayu 6 e karne L0ad")
             //console.log(self.selectedBlock+self.roomNumber);
             var q="block_no = '" + self.selectedBlock + "' AND room_no = '" + self.roomNumber + "'";
+            self.blk="";
+            self.room="";
             $.post("../api/searchApi.php", {query: q}, function(result){
                 self.results=result;
                 self.process=false;
                 self.def=_default();
+                self.blk=self.selectedBlock;
+                self.room=self.roomNumber;
             });
-            self.blk=self.selectedBlock;
-            self.room=self.roomNumber;
             self.initial=false;
 
           },
@@ -174,16 +176,22 @@
               self.isLandscape=false;
             }
           },
+          beautify : function( s ){
+            return s.split(' ').map(function (e) {
+                  return e.substr(0,1).toUpperCase() + e.substr(1).toLowerCase();
+            }).join(" ");
+          },
           do_print:function () {
-              var str='<head> <style>body{font-family: sans-serif; padding-left: 3em; padding-right: 3em;} td{ border:1px solid #CCC; }</style></head><body> <center> <h1>'+ (this.results[0] ? this.results[0].block_no: "") +' - '+(this.results[0] ? this.results[0].room_no: "")+'</h1> </center>';
+              var printstr='<head> <style>body{font-family: sans-serif; padding-left: 3em; padding-right: 3em;} td{ border:1px solid #CCC; }</style></head><body> <center> <h1>'+ (this.results[0] ? this.results[0].block_no: "") +' - '+(this.results[0] ? this.results[0].room_no: "")+'</h1> </center>';
               for( i in this.results )
               {
+                e=this.results[i];
+                printstr +='<table class="tbl" cellpadding="6" width="100%" cellspacing="0"> <tbody> <tr> <td rowspan="7" align="center" width="30%"><img src="'+( e.photo ? e.photo : _default() )+'" width="150px" alt=""> </td><td width="25%"><strong>Name</strong></td><td>'+this.beautify(e.name)+'</td></tr><tr> <td width="25%"><strong>Student Mobile No</strong></td><td>'+e.stud_mob+' </td></tr><tr> <td width="25%"><strong>Enrollment No</strong></td><td>'+e.enroll_no+'</td></tr><tr> <td width="25%"><strong>Branch - Sem</strong></td><td>'+ e.branch +' - '+e.sem+'</td></tr><tr> <td width="25%"><strong>Category</strong></td><td>'+ e.category +'</td></tr><tr> <td width="25%"><strong>Admission Type</strong></td><td>'+e.addmission_type+'</td></tr><tr> <td width="25%"><strong>Course</strong></td><td>'+e.course+'</td></tr></tbody> </table> <br>';
                   e= this.results[i];
-                  str +='<table class="tbl" cellpadding="6" width="100%" cellspacing="0"> <tbody> <tr> <td rowspan="7" align="center" width="30%"><img src="'+( e.photo ? e.photo : _default() )+'" width="150px" alt=""> </td><td width="25%"><strong>Name</strong></td><td>'+e.name+'</td></tr><tr> <td width="25%"><strong>Student Mobile No</strong></td><td>'+e.stud_mob+' </td></tr><tr> <td width="25%"><strong>Enrollment No</strong></td><td>'+e.enroll_no+'</td></tr><tr> <td width="25%"><strong>Branch - Sem</strong></td><td>'+ e.branch +' - '+e.sem+'</td></tr><tr> <td width="25%"><strong>Category</strong></td><td>'+ e.category +'</td></tr><tr> <td width="25%"><strong>Admission Type</strong></td><td>'+e.addmission_type+'</td></tr><tr> <td width="25%"><strong>Course</strong></td><td>'+e.course+'</td></tr></tbody> </table> <br>';
                 }
-              str+='</body>';
+              printstr+='</'+'body>';
               var nw = window.open();
-              nw.document.write( str );
+              nw.document.write( printstr );
               nw.print();
               nw.close();
 
