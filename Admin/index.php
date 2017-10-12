@@ -1,6 +1,7 @@
+<?php include('./master/render_check.php'); ?>
 <!DOCTYPE html>
 <?php
-  set_include_path ('../api');
+   set_include_path ('../api');
   require 'connect.inc.php';
   $sql = "select * from student;";
   $result = mysqli_query($con , $sql);

@@ -1,6 +1,8 @@
 <?php
-set_include_path ('../api'); 
-include 'detail.inc.php';?>
+set_include_path ('../api');
+include 'detail.inc.php';
+?>
+<?php include('./master/render_check.php'); ?>
 <!DOCTYPE html>
 <html>
 

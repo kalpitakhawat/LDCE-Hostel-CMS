@@ -1,5 +1,5 @@
+include('./master/render_check.php');
 <html>
-
 <head>
     <meta charset="utf-8">
     <title></title>

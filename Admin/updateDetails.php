@@ -1,3 +1,4 @@
+<?php include('./master/render_check.php'); ?>
 <html>
 
 <head>
