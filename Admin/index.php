@@ -6,7 +6,6 @@
   $result = mysqli_query($con , $sql);
   $count = $result->num_rows;
 ?>
- ?>
 <html>
   <head>
     <meta charset="utf-8">
